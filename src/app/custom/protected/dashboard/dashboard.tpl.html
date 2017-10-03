@@ -1,0 +1,129 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+	<div ng-show="!dashboardCtrl.selectedAccount">
+		<div class="gorillascode-no-results">
+			<p>
+				Você ainda não possui conta do <strong>Mercado Livre</strong> associada ao
+				<strong>MeuML.com</strong>
+			</p>
+
+			<p>
+				Para ver o seu dashboard você deve primeiro adicionar uma conta do <strong>Mercado
+				Livre</strong>
+			</p>
+
+			<md-button ui-sref="protected.account.list" class="md-raised md-accent">
+				Ir para a tela de contas
+			</md-button>
+		</div>
+	</div>
+
+	<div ng-show="dashboardCtrl.selectedAccount">
+		<div ng-show="dashboardCtrl.accounts.result.length > 1" class="filters">
+			<md-input-container class="md-block">
+				<label>Conta</label>
+
+				<md-select ng-model="dashboardCtrl.selectedAccount"
+									 ng-model-options="{trackBy: '$value.id'}"
+									 md-on-close="dashboardCtrl.changeFilters()">
+					<md-option ng-value="account" ng-repeat="account in dashboardCtrl.accounts.result">
+						{{account.name}} - {{account.external_data.nickname}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+
+		<div>
+			<div layout="row" style="margin: 0.5vw; overflow: hidden">
+				<div class="container" flex>
+					<div class="head">
+						<h3>Resumo reputação</h3>
+					</div>
+					<div class="body fit">
+						<div layout="row" layout-xs="column" layout-sm="column" layout-md="column">
+							<div flex>
+								<div layout="row" layout-xs="column">
+									<div class="box" flex>
+										<h2 ng-bind="'Vendas: ' + total" class="bottom_line"></h2>
+										<div style="height: 23vw; overflow: hidden;">
+											<canvas class="chart chart-doughnut" chart-colors="vendas_colors"
+															chart-data="vendas_info" chart-labels="vendas" chart-options="vendas_options">
+											</canvas>
+										</div>
+									</div>
+									<div class="box" flex>
+										<h2 ng-bind="'Problemas: ' + totalHit" class="bottom_line baixas" flex></h2>
+										<div class="container_baixas">
+											<div class="inside_baixas">
+												<div ng-repeat="ctgr in rcategorias">
+													<div layout="row" style="margin: 0.6vw 0px;">
+														<label ng-bind="show[ctgr]+': ' + ttl[ctgr]" flex></label>
+														<label ng-bind="'(' + (percent[ctgr] | number:2) + '%)'"></label>
+													</div>
+													<div id="{{ctgr}}" class="progress_sm">
+														<div class="progress" ng-style="progress[ctgr]"></div>
+														<div ng-if="limit[ctgr]['percent']!=1" id="{{'tooltip_'+ctgr}}" class="legend">
+															<label ng-bind="'Limite: ' + limit[ctgr]['num'] + ' (' + limit[ctgr]['percent'] + '%)'"></label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="box" flex>
+								<h2 class="bottom_line">Reputação</h2>
+								<div style="margin: 15px 0px;">
+									<ol layout="row" class="barra_rptc">
+										<li ng-class="{vermelho : reputation == '1_red'}" class="rptc vermelho_inativo" flex></li>
+										<li ng-class="{laranja : reputation == '2_orange'}"
+												class="rptc laranja_inativo" flex></li>
+										<li ng-class="{amarelo : reputation == '3_yellow'}"
+												class="rptc amarelo_inativo" flex></li>
+										<li ng-class="{verdeclaro : reputation == '4_light_green'}" class="rptc verdeclaro_inativo" flex></li>
+										<li ng-class="{verde : reputation == '5_green'}" class="rptc verde_inativo" flex></li>
+									</ol>
+								</div>
+								<div style="height: 20vw; min-height: 200px">
+									<canvas style="height: 400px" id="line" class="chart chart-line" chart-data="data"
+													chart-colors="colors"
+													chart-labels="labels" chart-series="series" chart-options="options"
+													chart-dataset-override="datasetOverride" chart-click="onClick">
+									</canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-repeat="i in [2, -2]">
+				<div layout="row" layout-xs="column" class="fit">
+					<div ng-repeat="categ in rcategorias | limitTo: i" class="container" style="margin: 0.5vw" flex>
+						<div class="head">
+							<h3 ng-bind="show[categ]"></h3>
+						</div>
+						<div class="body fit">
+							<div class="lines">
+								<div class="info_percent" ng-repeat="lt in limites[categ] | orderBy:$index:true | limitTo: ((limites[categ].length*(-1))+1)" style="margin-left: calc({{i==2 ? '20%' : '80%'}} - {{$first ? '15px' : '30px'}});">{{(lt['num']*100) + '%'}}<br>|</div>
+								<ol layout="row" class="barra_rptc">
+									<li ng-repeat="(cr_key, cr) in cores" class="rptc" style="{{$first ? 'margin-left: 0px;':''}}{{$last ? 'margin-right: 0px;':''}}{{cr_key == limites[categ][rep_limite[categ]['index']]['cor'] ? 'background-color: '+cr['hex'] : 'background-color: '+cr['des']}}" flex></li>
+								</ol>
+								<div class="caixa" ng-style="style[categ]">
+									<center><div class="arrow-up"></div></center>
+									<div class="porcentagem" ng-bind="(percent[categ] | number:1) + '%'"></div>
+								</div>
+								<div ng-bind="objetivo[categ]['msg']"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<md-button ng-show="dashboardCtrl.selectedAccount" ng-click="dashboardCtrl.refresh()"
+					 ng-disabled="dashboardCtrl.refreshing" class="md-fab md-fab-bottom-right">
+	<md-icon md-font-icon="material-icons" aria-label="Atualizar dashboard">refresh</md-icon>
+	<md-tooltip md-direction="left">Atualizar dashboard</md-tooltip>
+</md-button>

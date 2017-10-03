@@ -1,0 +1,79 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+  <div class="header">
+    <p class="md-headline">Escolha o seu plano abaixo e comece a usar agora mesmo!</p>
+    <p class="md-subhead">
+      Para de perder tempo e utilize um serviço de hospedagem de imagens profissional.
+    </p>
+  </div>
+
+  <div ng-show="!planListCtrl.loading && !planListCtrl.plans.result.length">
+    <div class="gorillascode-no-results">
+      <p class="md-title">Nenhum plano disponível</p>
+    </div>
+  </div>
+
+  <div ng-show="planListCtrl.plans.result.length" layout="column" layout-gt-xs="row" class="plans">
+    <md-card flex ng-repeat="plan in planListCtrl.plans.result track by plan.id"
+             ng-class="planListCtrl.isCurrentPlan(plan) ? ['current', 'md-whiteframe-z3'] : ''"
+             class="plan">
+      <div ng-show="planListCtrl.isCurrentPlan(plan)"
+           md-colors="{background: 'default-primary-400'}" class="currrent-plan-indicator">
+        Plano atual
+      </div>
+
+      <md-card-title md-colors="{background: 'primary'}">
+        <md-card-title-text layout="column" layout-align="center center">
+          <div class="name">Plano {{plan.name}}</div>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content>
+        <ul class="features">
+          <li class="max-images">
+            <div class="value">{{plan.max_images | number}}</div>
+            <div>Imagens hospedadas</div>
+          </li>
+          <li>Gerenciador de templates</li>
+          <li>Editor HTML</li>
+          <li>Tabela de pesos e dimensões</li>
+        </ul>
+      </md-card-content>
+
+      <md-card-actions flex layout="column" layout-align="center">
+        <div layout="column" layout-align="center center" class="payment-info">
+          <div class="price">
+            R$ <span class="value">{{plan.price | currency:''}}</span>/mês
+          </div>
+
+          <div ng-show="planListCtrl.isEndDateVisible(plan)" class="end-date">
+            <a ng-href="{{planListCtrl.getSubscriptionLink(protectedCtrl.user.subscription)}}"
+               target="_blank">
+              Vencimento:
+              {{protectedCtrl.user.subscription.end_date | toUTCDate | date:"d 'de' MMMM"}}
+
+              <md-icon md-font-icon="material-icons" aria-label="Informações">info</md-icon>
+              <md-tooltip>Ver as informações da assinatura no MercadoPago</md-tooltip>
+            </a>
+          </div>
+        </div>
+
+        <md-button ng-show="planListCtrl.isSubscribeButtonVisible(plan)"
+                   ng-click="planListCtrl.subscribe(plan, $event)"
+                   ng-disabled="planListCtrl.changingPlan"
+                   class="md-raised md-primary subscribe-button">
+          Selecionar
+        </md-button>
+
+        <md-button ng-show="planListCtrl.isPayButtonVisible(plan)"
+                   ng-click="planListCtrl.paySubscription()" class="md-raised pay-button">
+          Assinar
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
+
+<div class="help">
+  <iframe src="https://meuml.com/app/plan" frameborder="0" marginheight="0"
+          marginwidth="0"></iframe>
+</div>

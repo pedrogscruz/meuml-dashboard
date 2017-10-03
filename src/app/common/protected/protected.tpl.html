@@ -1,0 +1,73 @@
+<div flex layout="row">
+  <md-sidenav ng-include="'common/protected/sidenav/sidenav.tpl.html'"
+              class="gorillascode-sidenav md-whiteframe-z2"
+              md-component-id="sidenav-left" md-is-locked-open="$mdMedia('gt-sm')"></md-sidenav>
+
+  <div flex layout="column" class="gorillascode-page gorillascode-page-protected">
+    <div ng-show="!$state.includes('protected.migration-request') && protectedCtrl.hasRequestedMigrations">
+
+      <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+          <div flex></div>
+
+          <div class="text-center">
+            Existe uma pendência na sua conta
+            <md-button ui-sref="protected.migration-request" class="md-raised">Resolver</md-button>
+          </div>
+
+          <div flex></div>
+        </div>
+      </md-toolbar>
+    </div>
+
+    <md-toolbar class="main-toolbar">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="protectedCtrl.toggleMenu()" hide-gt-sm
+                   aria-label="Alternar menu">
+          <md-icon md-font-icon="material-icons" aria-label="Alternar menu">menu</md-icon>
+        </md-button>
+
+        <h1>{{pageTitle}}</h1>
+      </div>
+    </md-toolbar>
+
+    <md-content flex layout="column" gorillas-scroll-bottom-notifier>
+      <div md-colors="{background: 'primary'}" class="gorillascode-content-background"></div>
+
+      <div flex class="main-content" ui-view>
+        <div layout="column" layout-align="center center" flex>
+          <md-progress-circular md-mode="indeterminate" md-diameter="96"></md-progress-circular>
+        </div>
+      </div>
+    </md-content>
+
+    <div ng-show="!$state.includes('protected.plan.list')">
+      <md-toolbar class="md-warn" ng-show="protectedCtrl.user.subscription.status == 'CANCELED'">
+        <div class="md-toolbar-tools">
+          <div flex></div>
+
+          <div ng-show="protectedCtrl.user.subscription.status == 'CANCELED'" class="text-center">
+            Assinatura cancelada
+            <md-button ui-sref="protected.plan.list" class="md-raised">Renovar</md-button>
+          </div>
+
+          <div flex></div>
+        </div>
+      </md-toolbar>
+
+      <md-toolbar class="md-warn" ng-show="!protectedCtrl.user.subscription">
+        <div class="md-toolbar-tools">
+          <div flex></div>
+
+          <div class="text-center">
+            <md-button ui-sref="protected.plan.list" class="md-raised">
+              Você deve assinar um plano
+            </md-button>
+          </div>
+
+          <div flex></div>
+        </div>
+      </md-toolbar>
+    </div>
+  </div>
+</div>

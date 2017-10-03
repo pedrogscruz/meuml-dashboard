@@ -1,0 +1,236 @@
+.protected-image-list {
+  .gorillascode-content {
+    max-width: 1250px;
+  }
+
+  .gorillascode-content-background {
+    display: none;
+  }
+
+  .md-toolbar-fixed {
+    background-color: #4285f4;
+    color: #fff;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    md-icon {
+      color: #fff;
+    }
+  }
+
+  .upload-drop-info {
+    background-color: rgba(66, 133, 244, 0.9);
+    bottom: 0;
+    color: #e8f0fe;
+    display: none;
+    font-size: 28px;
+    left: 0;
+    padding-top: 150px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 10;
+
+    md-icon {
+      color: #e8f0fe;
+      font-size: 150px;
+      height: 150px;
+    }
+  }
+
+  .acceptClass {
+    .upload-drop-info {
+      display: block;
+    }
+  }
+
+  .filters {
+    margin-bottom: 18px;
+
+    .tags {
+      margin-right: 16px;
+
+      .icon {
+        margin-right: 16px;
+      }
+
+      md-autocomplete {
+        input {
+          width: 300px;
+        }
+      }
+    }
+
+    .tags-cloud {
+      margin-top: 32px;
+
+      .md-caption {
+        color: rgba(0, 0, 0, 0.54);
+        margin-bottom: 6px;
+      }
+
+      .tags {
+        .tag {
+          font-size: 14px;
+          text-decoration: underline;
+        }
+
+        .count {
+          color: rgba(0, 0, 0, 0.54);
+          font-size: 12px;
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+
+  .selected-files {
+    margin: 0 0 48px 0;
+    padding: 16px;
+
+    .info {
+      padding: 8px;
+    }
+
+    .tags {
+      margin-right: 16px;
+    }
+  }
+
+  .upload-thumbnail {
+    background-color: #000;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100px;
+    margin-bottom: 16px;
+    margin-right: 16px;
+    width: 100px;
+  }
+
+  .images {
+    margin: 0 -8px 0 -8px;
+
+    .image-wrapper {
+      display: inline-block;
+      width: 100%;
+
+      @media (min-width: 600px) {
+        width: 50%;
+      }
+
+      @media (min-width: 1280px) {
+        width: 33.3%;
+      }
+
+      .image {
+        position: relative;
+
+        .file-upload-progress {
+          background-color: rgba(255, 255, 255, 0.8);
+          bottom: 0;
+          left: 0;
+          padding: 140px 20px 0 20px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 1;
+        }
+
+        .actions {
+          background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.54), transparent);
+          display: none;
+          height: 65px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+
+          .select {
+            padding: 12px 0 0 12px;
+
+            .md-icon {
+              border-color: rgba(255, 255, 255, 0.87);
+            }
+          }
+
+          md-icon {
+            color: rgba(255, 255, 255, 0.87);
+          }
+        }
+
+        .image-file {
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          cursor: pointer;
+          display: block;
+          height: 100px;
+          overflow: hidden;
+          padding-bottom: 50%;
+          width: 100%;
+        }
+
+        md-card-content {
+          padding-bottom: 0;
+
+          .tags-list {
+            .tags {
+              overflow: hidden;
+              white-space: nowrap;
+
+              .meuml-tag {
+                margin-right: 8px;
+              }
+            }
+
+            .add-button {
+              padding: 7px 0;
+            }
+
+            .edit-button {
+              margin-top: -6px;
+            }
+          }
+
+          .image-url {
+            margin: 8px 0 16px 0;
+
+            input {
+              font-size: 13px;
+              height: 24px;
+            }
+
+            .md-errors-spacer {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .image:hover {
+        .actions {
+          display: flex;
+        }
+      }
+
+      .image.selected {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+
+        .actions {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+.tag-dialog {
+  @media (min-width: 600px) {
+    width: 600px;
+  }
+}

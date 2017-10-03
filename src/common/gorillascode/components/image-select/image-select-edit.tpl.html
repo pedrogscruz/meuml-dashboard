@@ -1,0 +1,15 @@
+<md-dialog class="gorillascode-profile-photo-edit" aria-label="Alterar Foto">
+  <md-dialog-content class="md-dialog-content">
+    <div accept="image/*" ngf-drop ng-model="imageSelectEditCtrl.file" ngf-pattern="image/*"
+         ngf-drag-over-class="'drag-over'" class="crop-area">
+      <img-crop image="imageSelectEditCtrl.file | ngfDataUrl" area-type="square"
+                result-image="imageSelectEditCtrl.fileCroppedData"
+                result-image-size="imageSelectEditCtrl.dimension"/>
+    </div>
+  </md-dialog-content>
+
+  <md-dialog-actions>
+    <md-button ng-click="imageSelectEditCtrl.cancel()">Cancelar</md-button>
+    <md-button class="md-raised md-primary" ng-click="imageSelectEditCtrl.save()">Salvar</md-button>
+  </md-dialog-actions>
+</md-dialog>

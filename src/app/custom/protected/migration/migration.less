@@ -1,0 +1,111 @@
+.protected-migration {
+  .gorillascode-content {
+    border-bottom: none;
+  }
+
+  .gorillascode-content-background {
+    display: none;
+  }
+
+  md-card {
+    margin: auto;
+    max-width: 500px;
+
+    md-card-header {
+      background-color: #ffeb3b;
+      text-align: center;
+
+      img {
+        margin: auto;
+        max-width: 300px;
+      }
+    }
+
+    md-card-content {
+      color: rgba(0, 0, 0, 0.54);
+    }
+
+    md-card-actions {
+      padding: 16px;
+    }
+
+    .providers {
+      md-checkbox {
+        img {
+          height: 24px;
+        }
+      }
+
+      md-divider {
+        margin-bottom: 26px;
+      }
+    }
+
+    .migration {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      font-size: 14px;
+      padding: 16px;
+
+      .status-started,
+      .status-restart {
+        .title {
+          font-weight: 500;
+        }
+
+        .count {
+          color: rgba(0, 0, 0, 0.54);
+          font-weight: 500;
+        }
+
+        .note {
+          color: rgba(0, 0, 0, 0.54);
+          margin-top: 12px;
+        }
+
+        md-progress-linear {
+          margin-top: 6px !important;
+          margin-bottom: 6px !important;
+        }
+      }
+
+      .status-restart {
+        md-progress-linear {
+          margin-top: 6px !important;
+          margin-bottom: 6px !important;
+        }
+
+        .note {
+          color: #f00;
+        }
+      }
+
+      .status-finished {
+        color: rgba(0, 0, 0, 0.54);
+      }
+
+      .status-error {
+        color: #f00;
+      }
+    }
+  }
+
+  .help {
+    iframe {
+      height: 1450px;
+      width: 100%;
+    }
+  }
+}
+
+.protected-migration-fix-duplicated-images {
+  .gorillascode-content-background {
+    display: none;
+  }
+
+  md-card {
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0 auto 32px auto;
+    max-width: 600px;
+    padding: 20px;
+  }
+}

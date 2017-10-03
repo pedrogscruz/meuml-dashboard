@@ -1,0 +1,121 @@
+<div class="header">
+  <div class="text-center">
+    <a href="/">
+      <img class="logo" src="/assets/images/logo_color-256-117.png" title="MeuML.com">
+    </a>
+  </div>
+</div>
+
+<md-content flex role="navigation">
+  <md-list flex>
+    <md-divider></md-divider>
+
+    <md-list-item class="md-2-line" ui-sref="protected.my-account"
+                  ng-class="{ active: $state.includes('protected.my-account') }">
+      <div gorillas-gravatar="protectedCtrl.user.photo.url"
+           gorillas-gravatar-email="protectedCtrl.user.email" class="md-avatar"></div>
+
+      <div class="md-list-item-text">
+        <h3>{{protectedCtrl.user.name.split(' ')[0]}}</h3>
+        <p md-truncate>{{protectedCtrl.user.email}}</p>
+      </div>
+    </md-list-item>
+
+    <md-divider></md-divider>
+
+    <md-list-item ui-sref="protected.home" ng-class="{ active: $state.includes('protected.home') }">
+      <md-icon md-font-icon="material-icons" aria-label="Início">home</md-icon>
+      <p>Início</p>
+    </md-list-item>
+
+    <md-list-item ui-sref="protected.dashboard"
+                  ng-class="{ active: $state.includes('protected.dashboard') }">
+      <md-icon md-font-icon="material-icons" aria-label="Dashboard">dashboard</md-icon>
+      <p>Dashboard</p>
+    </md-list-item>
+
+    <md-list-item ui-sref="protected.account.list"
+                  ng-class="{ active: $state.includes('protected.account') }">
+      <md-icon md-font-icon="material-icons" aria-label="Contas">group</md-icon>
+      <p>Contas</p>
+    </md-list-item>
+
+    <md-list-item ng-if="protectedCtrl.isVisible.images" ui-sref="protected.image.list"
+                  ng-class="{ active: $state.includes('protected.image') }">
+      <md-icon md-font-icon="material-icons" aria-label="Imagens">photo_library</md-icon>
+      <p>Imagens</p>
+    </md-list-item>
+
+    <md-list-item ng-if="protectedCtrl.isVisible.templates" ui-sref="protected.template.list"
+                  ng-class="{ active: $state.includes('protected.template') }">
+      <md-icon md-font-icon="material-icons" aria-label="Templates">description</md-icon>
+      <p>Templates</p>
+    </md-list-item>
+
+    <md-list-item ng-if="protectedCtrl.isVisible.htmlEditor" ui-sref="protected.html-editor"
+                  ng-class="{ active: $state.includes('protected.html-editor') }">
+      <md-icon md-font-icon="material-icons" aria-label="Editor HTML">code</md-icon>
+      <p>Editor HTML</p>
+    </md-list-item>
+
+    <md-list-item ng-if="protectedCtrl.isVisible.productCategory"
+                  ui-sref="protected.product-category.list"
+                  ng-class="{ active: $state.includes('protected.product-category') }">
+      <md-icon md-font-icon="material-icons" aria-label="Categorias">list</md-icon>
+      <p>Categorias</p>
+    </md-list-item>
+
+    <md-list-item ng-if="protectedCtrl.isVisible.migration" ui-sref="protected.migration"
+                  ng-class="{ active: $state.includes('protected.migration') }">
+      <md-icon md-font-icon="material-icons" aria-label="Ferramentas">build</md-icon>
+      <p>Ferramentas</p>
+      <div class="md-secondary new">Novo</div>
+    </md-list-item>
+
+    <md-divider ng-show="protectedCtrl.isVisible.plan"></md-divider>
+
+    <md-list-item ng-show="protectedCtrl.isVisible.plan" ui-sref="protected.plan.list"
+                  ng-class="{ active: $state.includes('protected.plan') }" class="md-2-line">
+      <md-icon md-font-icon="material-icons" aria-label="Planos">star</md-icon>
+
+      <div class="md-list-item-text" layout="column">
+        <h3>Plano <strong>{{protectedCtrl.user.subscription.plan.name}}</strong></h3>
+        <h4>{{protectedCtrl.subcriptionStatus}}</h4>
+      </div>
+    </md-list-item>
+
+    <div ng-show="protectedCtrl.isVisible.imagesCount" class="images-count">
+      <div class="title">Imagens hospedadas</div>
+
+      <div class="count">
+        {{protectedCtrl.imagesStats.count | number}} de
+        {{protectedCtrl.user.subscription.plan.max_images | number}}
+      </div>
+
+      <md-progress-linear md-mode="determinate"
+                          value="{{(protectedCtrl.imagesStats.count * 100) / protectedCtrl.user.subscription.plan.max_images}}"></md-progress-linear>
+
+      <div
+          ng-show="protectedCtrl.imagesStats.count == protectedCtrl.user.subscription.plan.max_images"
+          class="change-plan">
+        <div>
+          <strong>Limite de imagens hospedadas atingido</strong>
+        </div>
+
+        <md-button ui-sref="protected.plan.list" class="md-raised">Alterar plano</md-button>
+      </div>
+    </div>
+
+    <md-divider></md-divider>
+
+    <md-list-item ng-href="mailto:contato@meuml.com" target="_blank">
+      <md-icon md-font-icon="material-icons" aria-label="Entrar em contato">message</md-icon>
+      <p>Entrar em contato</p>
+    </md-list-item>
+
+    <md-list-item ng-click="protectedCtrl.logout()">
+      <md-icon md-font-icon="material-icons" aria-label="Sair">power_settings_new</md-icon>
+      <p>Sair</p>
+    </md-list-item>
+  </md-list>
+</md-content>

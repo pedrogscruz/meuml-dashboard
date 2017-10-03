@@ -1,0 +1,152 @@
+.image-viewer-dialog {
+  background-color: #000;
+  color: #fff;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+
+  .md-sidenav-right {
+    padding: 0 16px;
+    width: 360px;
+
+    @media (max-width: 600px) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    md-toolbar {
+      background-color: transparent;
+      color: rgba(0, 0, 0, 0.87);
+
+      md-icon {
+        color: rgba(0, 0, 0, 0.54);
+      }
+    }
+
+    .details {
+      .title {
+        color: rgba(0, 0, 0, 0.54);
+        font-size: 13px;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 20px;
+        padding: 14px 16px;
+      }
+
+      .section {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        min-height: 36px;
+        padding: 18px 16px;
+
+        .icon {
+          min-width: 64px;
+        }
+
+        .content {
+          .line-1 {
+            color: rgba(0, 0, 0, 0.87);
+            font-size: 15px;
+            line-height: 15px;
+            word-break: break-all;
+          }
+
+          .line-2 {
+            color: rgba(0, 0, 0, 0.54);
+            font-size: 13px;
+            line-height: 13px;
+            margin-top: 8px;
+
+            .dimension {
+              display: inline-block;
+              margin-right: 15px;
+            }
+
+            .size {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+
+    .tags {
+      .meuml-tag {
+        margin: 0 16px 16px 0;
+      }
+    }
+  }
+
+  .toolbar-header-background {
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+    height: 64px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  md-toolbar.actions {
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .md-toolbar-tools {
+      background-color: transparent;
+
+      md-icon {
+        color: #fff;
+      }
+    }
+  }
+
+  .navigation-button,
+  .navigation-button:hover {
+    background: rgba(66, 66, 66, 0.54) !important;
+    position: absolute;
+    top: 50%;
+
+    md-icon {
+      color: #fff;
+    }
+  }
+
+  .navigation-button-previous {
+    left: 8px;
+  }
+
+  .navigation-button-next {
+    right: 8px;
+  }
+
+  .image {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  .url {
+    md-input-container {
+      margin: 2px auto;
+      max-width: 500px;
+
+      input {
+        color: #fff;
+        font-size: 13px;
+        text-align: center;
+      }
+    }
+
+    .md-errors-spacer {
+      display: none;
+    }
+
+    md-icon {
+      color: #fff;
+    }
+  }
+}

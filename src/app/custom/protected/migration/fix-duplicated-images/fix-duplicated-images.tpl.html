@@ -1,0 +1,23 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+  <md-card>
+    <md-card-content class="text-center">
+      <p>
+        A correção pode demorar algumas horas.<br>
+        Ao final do processo você irá receber um e-mail.<br>
+        Em seguida verifique os seus anúncios e em caso de problemas entre em contato conosco.
+      </p>
+
+      <p>
+        Enquanto você não receber o e-mail confirmando a correção não tente iniciar uma nova
+        correção.
+      </p>
+    </md-card-content>
+
+    <md-card-actions class="text-center">
+      <md-button ng-click="migrationFixCtrl.fix()" class="md-raised md-accent"
+                 ng-disabled="migrationFixCtrl.fixStarted">
+        {{migrationFixCtrl.fixStarted ? 'Correção em andamento...' : 'Começar agora'}}
+      </md-button>
+    </md-card-actions>
+  </md-card>
+</div>

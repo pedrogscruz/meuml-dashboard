@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MercadoLivre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"/>
+
+  <script type="text/javascript">
+    function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+
+      name = name.replace(/[\[\]]/g, "\\$&");
+
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+      var results = regex.exec(url);
+
+      if (!results) {
+        return null;
+      }
+
+      if (!results[2]) {
+        return '';
+      }
+
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var code = getParameterByName('code');
+
+    window.opener.oauthCallback(code);
+    window.close();
+  </script>
+</head>
+<body>
+Redirecionando...
+</body>
+</html>

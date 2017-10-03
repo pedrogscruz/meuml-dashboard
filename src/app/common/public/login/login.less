@@ -1,0 +1,133 @@
+.public-login,
+.public-password-change {
+  .gorillascode-login-logo {
+    margin-top: -56px;
+    padding: 16px 16px 0 16px;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+
+    @media (min-width: 600px) {
+      background: none !important;
+      margin-bottom: 32px;
+      margin-top: 0;
+    }
+
+    img {
+      max-width: 90%;
+    }
+  }
+
+  .md-toolbar-tools {
+    // Botão voltar da recuperação de senha
+    .md-button {
+      height: 100%;
+      left: 8px;
+      position: absolute;
+      top: 0;
+      width: 64px;
+
+      md-icon {
+        font-size: 48px;
+      }
+    }
+  }
+
+  .gorillascode-content {
+    margin-bottom: 10px;
+    padding: 0;
+
+    @media (min-width: 600px) {
+      max-width: 400px;
+    }
+
+    form {
+      padding: 35px 25px;
+    }
+
+    md-tabs {
+      md-tabs-wrapper {
+        display: none;
+      }
+    }
+
+    .form-separator {
+      display: table;
+      color: rgba(0, 0, 0, 0.54);
+      font-size: 14px;
+      margin: 35px 0;
+      white-space: nowrap;
+    }
+
+    .form-separator span {
+      padding: 0 10px;
+    }
+
+    .form-separator:before,
+    .form-separator:after {
+      border-top: 1px solid #dddddd;
+      content: '';
+      display: table-cell;
+      position: relative;
+      top: 9px;
+      width: 50%;
+    }
+
+    .btn-login {
+      height: 50px;
+      width: 100%;
+      margin: 6px 0px;
+    }
+
+    .login-facebook,
+    .login-google {
+      background-repeat: no-repeat;
+      color: #ffffff;
+    }
+
+    .login-facebook:before,
+    .login-google:before {
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      bottom: 0;
+      content: '';
+      display: none;
+      left: 40px;
+      position: absolute;
+      top: 0;
+
+      @media (min-width: 380px) {
+        display: block;
+      }
+    }
+
+    .login-facebook {
+      background-color: rgb(63, 81, 181) !important;
+      background-position-x: 8px;
+      background-position-y: 12px;
+      background-size: 25px;
+
+      &:before {
+        border-color: #284c88;
+      }
+
+      @media (min-width: 380px) {
+        background-image: url('images/login/facebook.svg');
+      }
+    }
+
+    .login-google {
+      background-color: #F44336 !important;
+      background-position-x: 10px;
+      background-position-y: 15px;
+      background-size: 21px;
+
+      &:before {
+        border-color: #de3f34;
+      }
+
+      @media (min-width: 380px) {
+        background-image: url('images/login/google.svg');
+      }
+    }
+  }
+}

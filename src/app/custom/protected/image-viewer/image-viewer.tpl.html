@@ -1,0 +1,146 @@
+<md-dialog aria-label="Visualizar imagem" class="image-viewer-dialog"
+           hotkey="{ left: imageViewerCtrl.showPreviousImage, right: imageViewerCtrl.showNextImage }">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2"
+              md-component-id="sidenav-image-information"
+              md-is-locked-open="false">
+
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1>Informações</h1>
+
+        <div flex></div>
+
+        <md-button ng-click="imageViewerCtrl.toggleInfo()" class="md-icon-button">
+          <md-icon md-font-icon="material-icons" aria-label="Fechar">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-content>
+      <div ng-show="imageViewerCtrl.image.tags.length" class="details">
+        <div class="title">Tags</div>
+
+        <div class="section tags">
+        <span
+            ng-repeat="imageTag in imageViewerCtrl.image.tags | orderBy:'-created_at' track by imageTag.id"
+            class="meuml-tag">
+          {{imageTag.tag}}
+        </span>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="title">Detalhes</div>
+
+        <div class="section">
+          <div class="icon">
+            <md-icon md-font-icon="material-icons" aria-label="URL">link</md-icon>
+          </div>
+
+          <div class="content">
+            <div class="line-1">
+              <a ng-href="{{imageViewerCtrl.image.url}}" target="_blank">
+                {{imageViewerCtrl.image.url}}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="icon">
+            <md-icon md-font-icon="material-icons" aria-label="Data">event</md-icon>
+          </div>
+
+          <div class="content">
+            <div class="line-1">
+              {{imageViewerCtrl.image.file.created_at | toUTCDate | date:'mediumDate'}}
+            </div>
+
+            <div class="line-2">
+              {{imageViewerCtrl.image.file.created_at | toUTCDate | date:'EEE'}},
+              {{imageViewerCtrl.image.file.created_at | toUTCDate | date:'shortTime'}}
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="icon">
+            <md-icon md-font-icon="material-icons" aria-label="Detalhes">photo</md-icon>
+          </div>
+
+          <div class="content">
+            <div class="line-1">
+              {{imageViewerCtrl.image.file.original_name}}
+            </div>
+
+            <div class="line-2">
+              <div ng-show="imageViewerCtrl.image.file.width && imageViewerCtrl.image.file.height"
+                   class="dimension">
+                {{imageViewerCtrl.image.file.width}} × {{imageViewerCtrl.image.file.height}}
+              </div>
+
+              <div class="size">{{imageViewerCtrl.image.file.size | fileSize}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div ng-show="imageViewerCtrl.image.external_ref" class="section">
+          <div class="icon">
+            <md-icon md-font-icon="material-icons" aria-label="URL">file_download</md-icon>
+          </div>
+
+          <div class="content">
+            <div class="line-1">
+              <a ng-href="{{imageViewerCtrl.image.external_ref}}" target="_blank"
+                 title="Origem da imagem">
+                {{imageViewerCtrl.image.external_ref}}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </md-sidenav>
+
+  <div class="toolbar-header-background"></div>
+
+  <md-toolbar class="actions">
+    <div class="md-toolbar-tools">
+      <md-button ng-click="imageViewerCtrl.close()" class="md-icon-button">
+        <md-icon md-font-icon="material-icons" aria-label="Fechar">arrow_back</md-icon>
+      </md-button>
+
+      <div flex></div>
+
+      <md-button ng-click="imageViewerCtrl.toggleInfo()" class="md-icon-button">
+        <md-icon md-font-icon="material-icons" aria-label="Informações">info</md-icon>
+        <md-tooltip>Informações</md-tooltip>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-button ng-show="imageViewerCtrl.index > 0" ng-click="imageViewerCtrl.showPreviousImage()"
+             class="md-icon-button navigation-button navigation-button-previous">
+    <md-icon md-font-icon="material-icons" aria-label="Imagem anterior">navigate_before</md-icon>
+  </md-button>
+
+  <md-button ng-show="imageViewerCtrl.index < (imageViewerCtrl.images.length - 1)"
+             ng-click="imageViewerCtrl.showNextImage()"
+             class="md-icon-button navigation-button navigation-button-next">
+    <md-icon md-font-icon="material-icons" aria-label="Próxima imagem">navigate_next</md-icon>
+  </md-button>
+
+  <md-dialog-content flex layout="column" md-swipe-left="imageViewerCtrl.showNextImage()"
+                     md-swipe-right="imageViewerCtrl.showPreviousImage()">
+    <div flex layout="column" layout-align="center center">
+      <img ng-src="{{imageViewerCtrl.image.file.url}}" class="image" title="{{image.file.name}}">
+    </div>
+
+    <div class="url">
+      <md-input-container class="md-block">
+        <input type="text" ng-model="imageViewerCtrl.image.url" ng-readonly="true"
+               md-select-on-focus aria-label="URL da imagem">
+      </md-input-container>
+    </div>
+  </md-dialog-content>
+</md-dialog>

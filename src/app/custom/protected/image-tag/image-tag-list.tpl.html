@@ -1,0 +1,23 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+  <div ng-show="imageTagListCtrl.imageTags.result.length" class="gorillascode-results-count">
+    Exibindo
+    <ng-pluralize count="imageTagListCtrl.imageTags.limit"
+                  when="{'0': 'Nenhuma tag', 'one': '1 tag', 'other': '{{imageTagListCtrl.imageTags.limit | number}} tags'}"></ng-pluralize>
+  </div>
+
+  <div class="image-tags">
+    <div ng-show="!imageTagListCtrl.loading && !imageTagListCtrl.imageTags.result.length">
+      <div class="gorillascode-no-results">Nenhuma tag</div>
+    </div>
+
+    <md-list ng-show="imageTagListCtrl.imageTags.result.length">
+      <md-list-item ng-repeat="imageTag in imageTagListCtrl.imageTags.result track by imageTag.tag"
+                    ui-sref="protected.image.list({ tag: imageTag.tag })">
+        <div class="md-list-item-text" md-truncate>{{imageTag.tag}}</div>
+        <div class="md-secondary">{{imageTag.count}}</div>
+      </md-list-item>
+    </md-list>
+
+    <gorillascode-pagination gorillascode-controller="imageTagListCtrl"></gorillascode-pagination>
+  </div>
+</div>

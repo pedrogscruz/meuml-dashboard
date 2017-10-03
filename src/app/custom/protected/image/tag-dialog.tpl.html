@@ -1,0 +1,24 @@
+<md-dialog aria-label="Tags" class="tag-dialog">
+  <md-dialog-content class="md-dialog-content">
+    <h2 class="md-title">Tags</h2>
+
+    <p>Adicione uma ou mais tags para organizar as imagens</p>
+
+    <md-chips ng-model="tagDialogCtrl.tags">
+      <md-autocomplete
+          md-search-text="searchText"
+          md-items="tag in tagDialogCtrl.searchImageTag(searchText)"
+          md-item-text="tag"
+          md-autofocus
+          placeholder="Adicione uma tag">
+        <span md-highlight-text="searchText">{{tag}}</span>
+      </md-autocomplete>
+    </md-chips>
+  </md-dialog-content>
+
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="tagDialogCtrl.cancel()">Cancelar</md-button>
+    <md-button ng-click="tagDialogCtrl.save()" class="md-primary">Salvar</md-button>
+  </md-dialog-actions>
+</md-dialog>

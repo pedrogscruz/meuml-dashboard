@@ -1,0 +1,59 @@
+gorillascode-image-select {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  .photo {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    .file-select {
+      background: rgba(0, 0, 0, .26);
+      display: none;
+      flex: 1;
+
+      md-icon {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .photo.drag-over {
+    border: 2px dashed rgb(255, 193, 7);
+    margin: -2px 0 0 -2px;
+  }
+
+  &:hover {
+    .file-select {
+      display: flex;
+    }
+  }
+
+  &.circle {
+    border-radius: 50%;
+
+    .photo, .file-select {
+      border-radius: 50%;
+    }
+  }
+}
+
+.gorillascode-profile-photo-edit {
+  @media (min-width: 600px) {
+    min-width: 550px;
+  }
+
+  .crop-area {
+    height: 300px;
+    max-width: 100%;
+  }
+
+  .crop-area.drag-over {
+    border: 5px dashed rgb(255, 193, 7);
+  }
+}

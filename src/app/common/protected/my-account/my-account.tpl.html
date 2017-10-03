@@ -1,0 +1,38 @@
+<div class="gorillascode-content">
+  <form name="managerForm" ng-submit="myAccountControllerCtrl.save()">
+    <md-input-container class="md-block">
+      <label>Nome completo</label>
+      <input type="text" ng-model="myAccountControllerCtrl.user.name" name="userName"
+             maxlength="256" autocomplete="name" required autofocus>
+
+      <div ng-messages="managerForm.userName.$error">
+        <div ng-message="required">Campo obrigatório</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block md-input-has-value">
+      <label>E-mail</label>
+      <div>{{myAccountControllerCtrl.user.email}}</div>
+
+      <div class="gorillascode-input-hint">
+        Para alterar o e-mail entre em contato com o administrador
+      </div>
+    </md-input-container>
+
+    <div layout="column" layout-gt-xs="row">
+      <p flex-order-xs="3">
+        <a ui-sref="protected.change-password">Alterar senha</a>
+      </p>
+
+      <span flex></span>
+
+      <div layout="row">
+        <span flex></span>
+        <md-button type="submit" class="md-raised md-primary" ng-disabled="managerForm.$invalid">
+          Salvar
+        </md-button>
+      </div>
+    </div>
+  </form>
+
+</div>

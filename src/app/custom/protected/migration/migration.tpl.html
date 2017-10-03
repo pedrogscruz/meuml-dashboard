@@ -1,0 +1,157 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+  <md-card>
+    <md-card-header class="md-image-no-fill">
+      <div flex>
+        <img src="/assets/images/logos/mercado-livre.png" title="Mercado Livre">
+      </div>
+    </md-card-header>
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-title">Corretor de anúncios</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <p>
+        O corretor de anúncios busca todos os anúncios que tenham imagens do
+        <strong>Photobucket</strong>, <strong>Imgur</strong> ou <strong>outros</strong> sites de
+        hospedagem de imagens e migra elas para o <strong>MeuML.com</strong>
+      </p>
+
+      <div
+          ng-hide="migrationCtrl.lastMigration.status == 'STARTED' || migrationCtrl.lastMigration.status == 'RESTART'"
+          class="providers">
+        <md-checkbox aria-label="Photobucket" checklist-model="migrationCtrl.providers"
+                     checklist-value="'photobucket'">
+          <img src="/assets/images/logos/photobucket.png" title="Photobucket">
+        </md-checkbox>
+
+        <md-divider></md-divider>
+
+        <md-checkbox aria-label="Imgur" checklist-model="migrationCtrl.providers"
+                     checklist-value="'imgur'">
+          <img src="/assets/images/logos/imgur.png" title="Imgur">
+        </md-checkbox>
+
+        <md-divider></md-divider>
+
+        <md-checkbox aria-label="Outros" checklist-model="migrationCtrl.providers"
+                     checklist-value="'others'">
+          <strong>Outros</strong> (exceto Mercado Livre)
+        </md-checkbox>
+      </div>
+
+      <p>
+        Em seguida corrige todos os anúncios no <strong>MercadoLivre</strong>!
+        Rápido, simples e seguro!
+      </p>
+    </md-card-content>
+
+    <md-card-actions
+        ng-hide="migrationCtrl.lastMigration.status == 'STARTED' || migrationCtrl.lastMigration.status == 'RESTART'"
+        layout="column" layout-align="center center">
+      <md-button ng-click="migrationCtrl.start('UPDATE_MERCADO_LIVRE_LINKS')"
+                 ng-disabled="!migrationCtrl.providers.length" class="md-raised md-accent">
+        Começar agora
+      </md-button>
+    </md-card-actions>
+
+    <md-card-actions ng-show="migrationCtrl.lastMigration.status == 'RESTART'" layout="column"
+                     layout-align="center center">
+      <md-button ng-click="migrationCtrl.restart()" class="md-raised md-accent">
+        Continuar agora
+      </md-button>
+    </md-card-actions>
+
+    <div ng-show="migrationCtrl.lastMigration" class="migration gorillascode-animate">
+      <div ng-show="migrationCtrl.lastMigration.status == 'STARTED'" class="status-started">
+        <div class="title">Correção em andamento</div>
+
+        <div ng-show="migrationCtrl.lastMigration.total" class="count gorillascode-animate">
+          <div layout="row" layout-align="start center">
+            <div flex>
+              <md-progress-linear md-mode="determinate" class="md-accent"
+                                  value="{{(migrationCtrl.lastMigration.migrated * 100) / migrationCtrl.lastMigration.total}}"></md-progress-linear>
+            </div>
+          </div>
+
+          <div ng-show="!migrationCtrl.lastMigration.migrated">
+            <ng-pluralize count="migrationCtrl.lastMigration.total"
+                          when="{'0': '0 anúncios', 'one': '1 anúncio', 'other': '{{migrationCtrl.lastMigration.total | number}} anúncios'}"></ng-pluralize>
+            para corrigir
+          </div>
+
+          <div ng-show="migrationCtrl.lastMigration.migrated">
+            {{migrationCtrl.lastMigration.migrated | number}} de
+            <ng-pluralize count="migrationCtrl.lastMigration.total"
+                          when="{'0': ' 0 anúncios', 'one': '1 anúncio', 'other': '{{migrationCtrl.lastMigration.total | number}} anúncios'}"></ng-pluralize>
+            corrigidos
+          </div>
+        </div>
+
+        <div class="note">
+          A correção pode demorar. Você receberá um e-mail ao final do processamento.
+        </div>
+      </div>
+
+      <div ng-show="migrationCtrl.lastMigration.status == 'FINISHED'" class="status-finished">
+        <p>
+          O processo de migração finalizou! Porém, as imagens antigas ainda podem aparecer devido ao
+          cache do seu navegador. Por favor, aguarde, que as imagens corrigidas aparecem aos poucos,
+          e pode levar algum tempo até que todas as imagens apareçam normalmente. Caso algumas
+          imagens não funcionem, inicie novamente o processo após 1 dia. Execute o processo no
+          máximo 1 vez por dia, para evitar problemas nos seus anúncios.
+        </p>
+
+        Última correção feita em
+        {{migrationCtrl.lastMigration.finished_at | toUTCDate | date:'short'}} com
+        <ng-pluralize count="migrationCtrl.lastMigration.migrated"
+                      when="{
+                      '0': '0 anúncios corrigidos',
+                      'one': '1 anúncio corrigido',
+                      'other': '{{migrationCtrl.lastMigration.migrated | number}} anúncios corrigidos'}"></ng-pluralize>
+      </div>
+
+      <div ng-show="migrationCtrl.lastMigration.status == 'ERROR'" class="status-error">
+        Houve uma falha na última correção iniciada em
+        {{migrationCtrl.lastMigration.created_at | toUTCDate | date:'short'}}<br>
+        Tente novamente mais tarde.
+      </div>
+
+      <div ng-show="migrationCtrl.lastMigration.status == 'RESTART'" class="status-restart">
+        <div ng-show="migrationCtrl.lastMigration.total" class="count gorillascode-animate">
+          <div layout="row" layout-align="start center">
+            <div flex>
+              <md-progress-linear md-mode="determinate" class="md-accent"
+                                  value="{{(migrationCtrl.lastMigration.migrated * 100) / migrationCtrl.lastMigration.total}}"></md-progress-linear>
+            </div>
+          </div>
+
+          <div ng-show="!migrationCtrl.lastMigration.migrated">
+            <ng-pluralize count="migrationCtrl.lastMigration.total"
+                          when="{'0': '0 anúncios', 'one': '1 anúncio', 'other': '{{migrationCtrl.lastMigration.total | number}} anúncios'}"></ng-pluralize>
+            para corrigir
+          </div>
+
+          <div ng-show="migrationCtrl.lastMigration.migrated">
+            {{migrationCtrl.lastMigration.migrated | number}} de
+            <ng-pluralize count="migrationCtrl.lastMigration.total"
+                          when="{'0': ' 0 anúncios', 'one': '1 anúncio', 'other': '{{migrationCtrl.lastMigration.total | number}} anúncios'}"></ng-pluralize>
+            corrigidos
+          </div>
+        </div>
+
+        <div class="note">
+          Seu processo de correção parou devido a alguma instabilidade no MercadoLivre. Você pode
+          continuar quando quiser!
+        </div>
+      </div>
+    </div>
+  </md-card>
+</div>
+
+<div class="help">
+  <iframe src="https://meuml.com/migrador/" frameborder="0" marginheight="0"
+          marginwidth="0"></iframe>
+</div>

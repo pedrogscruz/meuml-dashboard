@@ -1,0 +1,23 @@
+<div class="gorillascode-fixed-toolbar">
+  <md-button hide show-gt-xs clipboard ng-click="htmlEditorCtrl.insertTemplate()" class="md-raised">
+    Inserir template
+  </md-button>
+
+  <md-button hide show-gt-xs clipboard text="htmlEditorCtrl.template.html_text"
+             on-copied="htmlEditorCtrl.sourceCodeCopied()"
+             on-error="htmlEditorCtrl.sourceCodeCopyError(err)" class="md-raised">
+    Copiar código-fonte
+  </md-button>
+</div>
+
+<div class="gorillascode-content">
+  <div ng-show="htmlEditorCtrl.loadingTemplates" layout="column" layout-align="center center"
+       class="loading-status">
+    <md-progress-circular md-mode="indeterminate" md-diameter="50"></md-progress-circular>
+  </div>
+
+  <div ng-if="!htmlEditorCtrl.loadingTemplates" class="wysiwyg-editor">
+    <textarea ng-model="htmlEditorCtrl.template.html_text"
+              ui-tinymce="htmlEditorCtrl.tinymceOptions"></textarea>
+  </div>
+</div>

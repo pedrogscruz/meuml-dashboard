@@ -1,0 +1,50 @@
+<div class="gorillascode-content gorillascode-content-list gorillascode-content-no-background">
+  <div ng-show="!accountListCtrl.loading && !accountListCtrl.accounts.result.length">
+    <div class="gorillascode-no-results">
+      <p class="md-title">Nenhuma conta</p>
+      <p>Clique no botão abaixo para adicionar uma conta do Mercado Livre</p>
+    </div>
+  </div>
+
+  <md-card ng-show="accountListCtrl.accounts.result.length" class="accounts">
+    <md-list>
+      <md-list-item ng-repeat="account in accountListCtrl.accounts.result track by account.id"
+                    class="gorillascode-animate md-2-line">
+        <a class="md-avatar" ng-href="{{account.external_data.permalink}}" target="_blank"
+           ng-style="{ backgroundImage: 'url(' + (account.image.url || '/assets/images/default-avatar.png') + ')' }">
+        </a>
+
+        <div class="md-list-item-text">
+          <div layout="row">
+            <h3 flex>{{account.name}} - {{account.external_data.nickname}}</h3>
+            <h3 flex ng-show="account.external_store_name">{{account.external_store_name}}</h3>
+          </div>
+
+          <div layout="row">
+            <h4 flex>{{account.external_email}}</h4>
+            <h4 flex>{{account.external_name}}</h4>
+          </div>
+        </div>
+
+        <md-button ng-click="accountListCtrl.edit(account, $event)"
+                   class="md-secondary md-raised md-accent">
+          Editar
+        </md-button>
+
+        <md-button ng-click="accountListCtrl.delete(account, $index, $event)"
+                   class="md-secondary md-raised md-warn">
+          Excluir
+        </md-button>
+
+        <md-divider ng-show="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-card>
+
+  <gorillascode-pagination gorillascode-controller="accountListCtrl"></gorillascode-pagination>
+</div>
+
+<md-button ng-click="accountListCtrl.new()" class="md-fab md-fab-bottom-right md-fab-fixed">
+  <md-icon md-font-icon="material-icons" aria-label="Adicionar conta">add</md-icon>
+  <md-tooltip md-direction="left">Adicionar conta</md-tooltip>
+</md-button>

@@ -1,0 +1,100 @@
+<div class="gorillascode-login-logo" md-colors="{background: 'default-primary'}">
+  <img src="/assets/images/logo_color-380x164.png" title="Logo">
+</div>
+
+<div class="gorillascode-content">
+  <md-toolbar>
+    <div class="md-toolbar-tools" layout-align="center center">
+      <md-button ng-show="loginCtrl.selectedBox == 1" ng-click="loginCtrl.selectedBox = 0"
+                 class="md-icon-button">
+        <md-icon md-font-icon="material-icons" aria-label="Voltar">keyboard_arrow_left</md-icon>
+      </md-button>
+
+      <div flex class="text-center">
+        <h1 ng-show="loginCtrl.selectedBox == 0">Acesso</h1>
+        <h1 ng-show="loginCtrl.selectedBox == 1">Recuperar senha</h1>
+      </div>
+    </div>
+  </md-toolbar>
+
+  <md-tabs md-dynamic-height md-border-bottom md-no-bar md-selected="loginCtrl.selectedBox">
+    <md-tab label="Acesso">
+      <form name="loginForm" ng-submit="loginCtrl.login()">
+        <div ng-if="loginCtrl.showOAuthButtons">
+          <md-button ng-click="loginCtrl.loginGoogle()" class="btn-login login-google">
+            Utilize sua conta do Google
+          </md-button>
+
+          <md-button ng-click="loginCtrl.loginFacebook()" class="btn-login login-facebook">
+            Utilize sua conta do Facebook
+          </md-button>
+
+          <p class="form-separator">
+            <span>ou use seu e-mail</span>
+          </p>
+        </div>
+
+        <md-input-container class="md-block">
+          <label>E-mail</label>
+          <input type="email" ng-model="loginCtrl.user.email" name="email" maxlength="256"
+                 autocomplete="email" required autofocus>
+
+          <div ng-messages="loginForm.email.$error">
+            <div ng-message="required">Informe seu e-mail</div>
+            <div ng-message="email">E-mail inválido</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>Senha</label>
+          <input type="password" ng-model="loginCtrl.user.password" name="password" required
+                 maxlength="256">
+
+          <div ng-messages="loginForm.password.$error">
+            <div ng-message="required">Informe sua senha</div>
+          </div>
+        </md-input-container>
+
+        <md-button type="submit" class="btn-login md-raised md-primary"
+                   ng-disabled="loginForm.$invalid">
+          Entrar
+        </md-button>
+      </form>
+    </md-tab>
+
+    <md-tab label="Recuperar senha">
+      <form ng-show="!loginCtrl.emailSent" name="recoverForm" ng-submit="loginCtrl.recover()">
+        <p>Informe seu e-mail e enviaremos instruções para você recuperar a sua senha</p>
+        <p>&nbsp;</p>
+
+        <md-input-container class="md-block">
+          <label>E-mail</label>
+          <input type="email" ng-model="loginCtrl.user.email" name="email" maxlength="256"
+                 autocomplete="email" required autofocus>
+
+          <div ng-messages="recoverForm.email.$error">
+            <div ng-message="required">Informe seu e-mail</div>
+            <div ng-message="email">E-mail inválido</div>
+          </div>
+        </md-input-container>
+
+        <md-button type="submit" class="md-raised md-primary btn-login"
+                   ng-disabled="recoverForm.$invalid">
+          Confirmar
+        </md-button>
+      </form>
+
+      <form ng-if="loginCtrl.emailSent">
+        <p>
+          Um e-mail foi enviado com as instruções para você recuperar a sua senha.
+        </p>
+      </form>
+    </md-tab>
+  </md-tabs>
+</div>
+
+<div ng-show="loginCtrl.selectedBox == 0" layout-xs="column"
+     class="text-center gorillascode-animate action-buttons">
+  <md-button ng-click="loginCtrl.selectedBox = 1">Esqueceu sua senha?</md-button>
+  <md-button ui-sref="public.signup">Crie sua conta</md-button>
+</div>

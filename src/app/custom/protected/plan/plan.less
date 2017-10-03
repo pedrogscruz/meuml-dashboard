@@ -1,0 +1,129 @@
+.protected-plan-list {
+  .gorillascode-content {
+    max-width: 1200px;
+  }
+
+  .gorillascode-content-background {
+    display: none;
+  }
+
+  @media (min-width: 960px) {
+    .main-toolbar {
+      display: none;
+    }
+  }
+
+  .header {
+    text-align: center;
+
+    .md-subhead {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+
+  .plans {
+    margin: 48px -10px 0;
+
+    .plan {
+      @media (min-width: 600px) {
+        margin-top: 28px;
+      }
+
+      .currrent-plan-indicator {
+        font-size: 14px;
+        padding: 6px 0;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      md-card-title {
+        color: #fff;
+        flex: initial;
+        font-size: 34px;
+        height: 64px;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      md-card-content {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      }
+
+      .features {
+        margin: 0;
+        padding: 0;
+
+        li {
+          color: rgba(0, 0, 0, 0.54);
+          display: block;
+          list-style: none;
+          padding: 8px 0;
+          text-align: center;
+        }
+
+        .max-images {
+          color: rgba(0, 0, 0, 0.87);
+          padding-bottom: 16px;
+
+          .value {
+            font-size: 32px;
+          }
+        }
+      }
+
+      .payment-info {
+        min-height: 84px;
+        padding: 8px 0;
+
+        .price {
+          color: rgba(0, 0, 0, 0.54);
+          text-align: center;
+
+          .value {
+            color: rgba(0, 0, 0, 0.87);
+            font-size: 36px;
+          }
+        }
+
+        .end-date {
+          color: rgba(0, 0, 0, 0.54);
+          font-size: 14px;
+          font-style: italic;
+          text-align: center;
+
+          a {
+            color: rgba(0, 0, 0, 0.54);
+          }
+        }
+      }
+
+      .subscribe-button {
+        background-color: #4caf50;
+        font-size: 18px;
+        min-height: 50px;
+      }
+
+      .subscribe-button:hover {
+        background-color: #388e3c;
+      }
+
+      .pay-button {
+        font-size: 18px;
+        min-height: 50px;
+      }
+    }
+
+    .plan.current {
+      margin-top: 0;
+    }
+  }
+
+  .help {
+    display: none;
+
+    iframe {
+      height: 1450px;
+      width: 100%;
+    }
+  }
+}

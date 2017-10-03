@@ -1,0 +1,10 @@
+<div class="photo" ng-style="{ 'background-image': 'url(' + source + ')' }"
+     ng-class="{ circle: circle }" ng-model="file" accept="image/*"
+     ngf-select="imageSelectCtrl.selectedPhoto($file, $event)"
+     ngf-drop="imageSelectCtrl.selectedPhoto($file, $event)"
+     ngf-drag-over-class="'drag-over'">
+  <div class="file-select" layout="row" layout-align="center center">
+    <md-icon md-font-icon="material-icons" aria-label="Alterar a foto">photo_camera
+    </md-icon>
+  </div>
+</div>

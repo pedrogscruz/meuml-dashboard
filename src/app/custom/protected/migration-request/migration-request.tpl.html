@@ -1,0 +1,30 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+  <div ng-show="!migrationRequestCtrl.migrations.result.length">
+    <div class="gorillascode-no-results">
+      <p class="md-title">Nenhuma pendência para resolver</p>
+    </div>
+  </div>
+
+  <div ng-show="migrationRequestCtrl.migrations.result.length">
+    <md-card ng-repeat="migration in migrationRequestCtrl.migrations.result">
+      <md-card-content class="text-center">
+        <p>
+          Identificamos a necessidade de uma correção na sua conta do <strong>MeuML.com</strong>.
+        </p>
+        <p>
+          Para poder continuar usando o sistema corretamente clique no botão abaixo.
+        </p>
+      </md-card-content>
+
+      <md-card-actions class="text-center">
+        <md-button ng-click="migrationRequestCtrl.start(migration)" class="md-raised md-accent">
+          Corrigir agora
+        </md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
+
+<div class="help">
+  <iframe src="https://meuml.com/fix/" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+</div>

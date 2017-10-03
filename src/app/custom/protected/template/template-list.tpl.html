@@ -1,0 +1,89 @@
+<div class="gorillascode-content gorillascode-content-no-background">
+  <div class="filters">
+    <div flex layout="row" layout-align="center center" class="tags">
+      <div hide show-gt-xs class="icon">
+        <md-button ng-click="templateListCtrl.changeFilters()" class="md-icon-button">
+          <md-icon md-font-icon="material-icons" aria-label="Pesquisar">search</md-icon>
+          <md-tooltip>Pesquisar</md-tooltip>
+        </md-button>
+      </div>
+
+      <div flex>
+        <md-chips ng-model="templateListCtrl.filters.tag"
+                  md-on-remove="templateListCtrl.changeFilters()"
+                  md-on-select="templateListCtrl.changeFilters()">
+          <md-autocomplete md-clear-button="true"
+                           md-search-text="searchText"
+                           md-items="tag in templateListCtrl.searchTemplateTag(searchText)"
+                           md-item-text="tag"
+                           md-autofocus
+                           placeholder="Pesquise por tags ou nome do arquivo">
+            <span md-highlight-text="searchText" md-highlight-flags="gi">{{tag}}</span>
+          </md-autocomplete>
+        </md-chips>
+      </div>
+    </div>
+
+    <div ng-show="templateListCtrl.topTemplateTags.length" class="tags-cloud">
+      <div class="md-caption">Tags mais usadas</div>
+
+      <div class="tags">
+        <a ng-repeat="templateTag in templateListCtrl.topTemplateTags" href=""
+           ng-click="templateListCtrl.appendTagToFilters(templateTag.tag)"
+           class="tag" title="Pesquisar por {{templateTag.tag}}">{{templateTag.tag}}</a>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="!templateListCtrl.loading && !templateListCtrl.templates.result.length">
+    <div class="gorillascode-no-results">
+      <p class="md-title">Nenhum template</p>
+    </div>
+  </div>
+
+  <div class="gorillascode-animate gorillascode-results-count"
+       ng-show="templateListCtrl.templates.result.length">
+    Exibindo
+    <ng-pluralize count="templateListCtrl.templates.limit"
+                  when="{'0': 'Nenhum template', 'one': '1 template', 'other': '{{templateListCtrl.templates.limit | number}} templates'}"></ng-pluralize>
+  </div>
+
+  <md-card ng-show="templateListCtrl.templates.result.length"
+           class="gorillascode-animate templates">
+    <md-table-container class="gorillascode-table-container">
+      <table md-table>
+        <thead md-head md-order="templateListCtrl.order"
+               md-on-reorder="templateListCtrl.changeOrder">
+        <tr md-row>
+          <th md-column md-order-by="name" class="name">Nome</th>
+          <th md-column class="tags">Tags</th>
+          <th md-column md-order-by="updated_at">Última edição</th>
+        </tr>
+        </thead>
+        <tbody md-body>
+        <tr md-row ng-repeat="template in templateListCtrl.templates.result track by template.id"
+            ui-sref="protected.template.edit({ id: template.id })" class="gorillascode-animate">
+          <td md-cell class="name">{{template.name}}</td>
+          <td md-cell class="tags">
+              <span ng-repeat="templateTag in template.tags track by templateTag.id"
+                    class="meuml-tag">
+                {{templateTag.tag}}
+              </span>
+          </td>
+          <td md-cell class="createdAt">
+            {{template.updated_at || template.created_at | toUTCDate | date:'short'}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card>
+
+  <gorillascode-pagination gorillascode-controller="templateListCtrl"></gorillascode-pagination>
+</div>
+
+<md-button ui-sref="protected.template.new"
+           class="md-fab md-fab-bottom-right md-fab-fixed">
+  <md-icon md-font-icon=" material-icons" aria-label="Adicionar template">add</md-icon>
+  <md-tooltip md-direction="left">Adicionar template</md-tooltip>
+</md-button>
